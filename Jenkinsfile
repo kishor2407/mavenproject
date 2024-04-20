@@ -6,9 +6,12 @@ pipeline
 		{
 			steps{ git 'https://github.com/kishor2407/mavenproject.git'} 
 		}
-		
-	    	stage('Build')
+	    
+	    	stage('Execute-UnitTest')
                 {
-			steps{ sh 'echo Build_successful'}}
+			steps{ withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MAVEN_HOME', mavenSettingsConfig: '', traceability: true) {
+				sh 'mvn test'}}
 		}
+		    
+	}
 }
